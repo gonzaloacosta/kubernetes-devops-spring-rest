@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: devops-spring-rest
+spec:
+  rules:
+  - host: api.gonzaloacosta.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: devops-spring-rest
+            port:
+              number: 8080
+        path: /
+        pathType: Exact

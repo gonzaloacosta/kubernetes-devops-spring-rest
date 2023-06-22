@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: devops-spring-rest
+  name: devops-spring-rest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devops-spring-rest
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: devops-spring-rest
+    spec:
+      containers:
+      - image: gonzaloacosta/devops-spring-rest:0.0.1-SNAPSHOT
+        name: devops-spring-rest
+        ports:
+        - containerPort: 8080
+        resources: {}
+status: {}
