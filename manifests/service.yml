@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: spring-rest
-  name: spring-rest
+    app: myapp
+  name: myapp
 spec:
   type: ClusterIP
   ports:
@@ -11,4 +11,4 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    app: spring-rest
+    app: myapp

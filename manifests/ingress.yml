@@ -1,17 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: spring-rest
+  name: myapp
   # annotations:
   #   ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: api.localtest.me
+  - host: myapp.localtest.me
     http:
       paths:
       - backend:
           service:
-            name: spring-rest
+            name: myapp
             port:
               number: 8080
         path: /

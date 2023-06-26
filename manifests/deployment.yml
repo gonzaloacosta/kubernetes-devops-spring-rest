@@ -3,21 +3,21 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: spring-rest
-  name: spring-rest
+    app: myapp
+  name: myapp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: spring-rest
+      app: myapp
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: spring-rest 
+        app: myapp 
     spec:
       containers:
-      - image: gonzaloacosta/devops-spring-rest:0.0.3-SNAPSHOT
-        name: spring-rest 
+      - image: gonzaloacosta/devops-spring-rest:0.0.1-SNAPSHOT
+        name: myapp 
         ports:
         - containerPort: 8080
