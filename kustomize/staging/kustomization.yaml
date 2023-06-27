@@ -1,0 +1,18 @@
+resources:
+- ./../base
+namespace: staging
+images:
+  - name: gonzaloacosta/devops-spring-rest
+    newTag: 0.0.2-SNAPSHOT
+replicas:
+- name: myapp 
+  count: 2
+patchesStrategicMerge:
+- |-
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: myapp
+  spec:
+    rules:
+    - host: api.staging.localtest.me
