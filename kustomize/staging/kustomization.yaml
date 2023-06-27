@@ -7,12 +7,13 @@ images:
 replicas:
 - name: myapp 
   count: 2
-patchesStrategicMerge:
-- |-
-  apiVersion: networking.k8s.io/v1
-  kind: Ingress
-  metadata:
+patchesJSON6902:
+- target:
+    group: networking.k8s.io
+    version: v1
+    kind: Ingress
     name: myapp
-  spec:
-    rules:
-    - host: api.staging.localtest.me
+  patch: |-
+    - op: replace
+      path: /spec/rules/0/host
+      value: api.staging.localtest.me
