@@ -18,30 +18,26 @@ patches:
       path: /spec/rules/0/host
       value: api.staging.localtest.me
 - target:
-    group: apps
-    version: v1
     kind: Deployment
     name: myapp
   patch: |-
-    apiVersion: apps/v1
+    - op: replace
+      path: /spec/template/spec/containers/0/readinessProbe
+      value:
+        httpGet:
+          port: 8080
+          path: /actuator/health
+        initialDelaySeconds: 5
+        periodSeconds: 10
+- target:
     kind: Deployment
-    metadata:
-      name: myapp
-    spec:
-      template:
-        spec:
-          containers:
-          - image: gonzaloacosta/devops-spring-rest
-            name: myapp 
-            readinessProbe:
-              httpGet:
-                port: 8080
-                path: /actuator/health
-              initialDelaySeconds: 5
-              periodSeconds: 10
-            livenessProbe:
-              httpGet:
-                port: 8080
-                path: /actuator/health
-              initialDelaySeconds: 15
-              periodSeconds: 20
+    name: myapp
+  patch: |-
+    - op: replace
+      path: /spec/template/spec/containers/0/livenessProbe
+      value:
+        httpGet:
+          port: 8080
+          path: /actuator/health
+        initialDelaySeconds: 15
+        periodSeconds: 20
