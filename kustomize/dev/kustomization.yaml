@@ -1,6 +1,6 @@
 resources:
 - ./../base
-namespace: test
+namespace: dev 
 images:
   - name: gonzaloacosta/devops-spring-rest
     newTag: 0.0.3-SNAPSHOT
@@ -14,7 +14,7 @@ patches:
   patch: |-
     - op: replace
       path: /spec/rules/0/host
-      value: api.test.localtest.me
+      value: api.dev.localtest.me
 - target:
     kind: Deployment
     name: myapp
