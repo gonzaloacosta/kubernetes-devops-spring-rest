@@ -1,85 +1,45 @@
 resources:
 - ./../base
-namespace: dev
+namespace: test
 images:
   - name: gonzaloacosta/devops-spring-rest
     newTag: 0.0.3-SNAPSHOT
 replicas:
 - name: myapp 
   count: 1
-# patchesJSON6902:
-# - target:
-#     group: networking.k8s.io
-#     version: v1
-#     kind: Ingress
-#     name: myapp
-#   patch: |-
-#     - op: replace
-#       path: /spec/rules/0/host
-#       value: api.dev.localtest.me
-# patchesStrategicMerge:
-# - |-
-#   apiVersion: apps/v1
-#   kind: Deployment
-#   metadata:
-#     name: myapp
-#   spec:
-#     template:
-#       spec:
-#         containers:
-#         - image: gonzaloacosta/devops-spring-rest
-#           name: myapp 
-#           ports:
-#           - containerPort: 8080
-#           readinessProbe:
-#             httpGet:
-#               port: 8080
-#               path: /actuator/health
-#             initialDelaySeconds: 5
-#             periodSeconds: 10
-#           livenessProbe:
-#             httpGet:
-#               port: 8080
-#               path: /actuator/health
-#             initialDelaySeconds: 15
-#             periodSeconds: 20
 patches:
 - target:
-    group: networking.k8s.io
-    version: v1
+    # group: networking.k8s.io
+    # version: v1
     kind: Ingress
     name: myapp
   patch: |-
     - op: replace
       path: /spec/rules/0/host
-      value: api.dev.localtest.me
+      value: api.test.localtest.me
 - target:
-    group: apps
-    version: v1
+    # group: apps
+    # version: v1
     kind: Deployment
     name: myapp
   patch: |-
-    apiVersion: apps/v1
+    - op: replace
+      path: /spec/template/spec/containers/0/readinessProbe
+      value:
+        httpGet:
+          port: 8080
+          path: /actuator/health
+        initialDelaySeconds: 5
+        periodSeconds: 10
+- target:
     kind: Deployment
-    metadata:
-      name: myapp
-    spec:
-      template:
-        spec:
-          containers:
-          - image: gonzaloacosta/devops-spring-rest
-            name: myapp 
-            ports:
-            - containerPort: 8080
-            readinessProbe:
-              httpGet:
-                port: 8080
-                path: /actuator/health
-              initialDelaySeconds: 5
-              periodSeconds: 10
-            livenessProbe:
-              httpGet:
-                port: 8080
-                path: /actuator/health
-              initialDelaySeconds: 15
-              periodSeconds: 20
+    name: myapp
+  patch: |-
+    - op: replace
+      path: /spec/template/spec/containers/0/livenessProbe
+      value:
+        httpGet:
+          port: 8080
+          path: /actuator/health
+        initialDelaySeconds: 15
+        periodSeconds: 20
