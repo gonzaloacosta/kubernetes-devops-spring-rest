@@ -2,8 +2,8 @@ resources:
 - ./../base
 namespace: prod
 images:
-  - name: gonzaloacosta/devops-spring-rest
-    newTag: 0.0.1-SNAPSHOT
+  - name: nexus.build38.cloud:8052/build38/devops-spring-rest
+    newTag: 0.0.3
 replicas:
 - name: myapp 
   count: 3

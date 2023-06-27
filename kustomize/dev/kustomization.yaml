@@ -1,9 +1,8 @@
 resources:
 - ./../base
-- ../dev
 namespace: dev 
 images:
-  - name: gonzaloacosta/devops-spring-rest
+  - name: nexus.build38.cloud:8052/build38/devops-spring-rest
     newTag: 0.0.3-SNAPSHOT
 replicas:
 - name: myapp 

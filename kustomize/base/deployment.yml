@@ -16,8 +16,10 @@ spec:
       labels:
         app: myapp 
     spec:
+      imagePullSecrets:
+      - name: nexus-registry-secret
       containers:
-      - image: gonzaloacosta/devops-spring-rest
+      - image: nexus.build38.cloud:8052/build38/devops-spring-rest
         name: myapp 
         ports:
         - containerPort: 8080
