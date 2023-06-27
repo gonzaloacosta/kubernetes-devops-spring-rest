@@ -9,7 +9,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   source:
     path: kustomize/staging
-    repoURL: 'https://github.com/gonzaloacosta/kubernetes-devops-spring-rest/'
+    repoURL: 'git@bitbucket.org:build38.com/kubernetes-devops-spring-rest.git'
     targetRevision: HEAD
     kustomize:
       namespace: staging
