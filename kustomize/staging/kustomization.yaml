@@ -7,7 +7,7 @@ images:
 replicas:
 - name: myapp 
   count: 2
-patchesJSON6902:
+patches:
 - target:
     group: networking.k8s.io
     version: v1
@@ -17,3 +17,31 @@ patchesJSON6902:
     - op: replace
       path: /spec/rules/0/host
       value: api.staging.localtest.me
+- target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: myapp
+  patch: |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: myapp
+    spec:
+      template:
+        spec:
+          containers:
+          - image: gonzaloacosta/devops-spring-rest
+            name: myapp 
+            readinessProbe:
+              httpGet:
+                port: 8080
+                path: /actuator/health
+              initialDelaySeconds: 5
+              periodSeconds: 10
+            livenessProbe:
+              httpGet:
+                port: 8080
+                path: /actuator/health
+              initialDelaySeconds: 15
+              periodSeconds: 20
