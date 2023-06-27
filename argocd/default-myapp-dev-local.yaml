@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: myapp-staging
+  name: myapp-dev
   namespace: argocd
 spec:
   destination:
-    namespace: staging
+    namespace: dev
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: kustomize/staging
+    path: kustomize/dev-local
     repoURL: git@bitbucket.org:build38/kubernetes-devops-spring-rest.git
     targetRevision: HEAD
   syncPolicy:

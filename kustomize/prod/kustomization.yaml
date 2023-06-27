@@ -7,3 +7,13 @@ images:
 replicas:
 - name: myapp 
   count: 3
+patches:
+- target:
+    group: networking.k8s.io
+    version: v1
+    kind: Ingress
+    name: myapp
+  patch: |-
+    - op: replace
+      path: /spec/rules/0/host
+      value: api-prod-myapp.eks.dev.build38.cloud

@@ -2,22 +2,21 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: myapp-dev
+  namespace: argocd
 spec:
   destination:
-    name: ''
     namespace: dev
-    server: 'https://kubernetes.default.svc'
+    server: https://kubernetes.default.svc
+  project: default
   source:
     path: kustomize/dev
-    repoURL: 'git@bitbucket.org:build38.com/kubernetes-devops-spring-rest.git'
+    repoURL: git@bitbucket.org:build38/kubernetes-devops-spring-rest.git
     targetRevision: HEAD
-    kustomize:
-      namespace: dev
-  sources: []
-  project: default
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
-      - CreateNamespace=true
+    - CreateNamespace=true
+    - Validate=false
+    - ApplyOutOfSyncOnly=true

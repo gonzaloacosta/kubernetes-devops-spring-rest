@@ -1,22 +1,20 @@
 resources:
 - ./../base
-namespace: staging
+namespace: dev 
 images:
   - name: gonzaloacosta/devops-spring-rest
-    newTag: 0.0.2-SNAPSHOT
+    newTag: 0.0.3-SNAPSHOT
 replicas:
 - name: myapp 
-  count: 2
+  count: 1
 patches:
 - target:
-    group: networking.k8s.io
-    version: v1
     kind: Ingress
     name: myapp
   patch: |-
     - op: replace
       path: /spec/rules/0/host
-      value: api-staging-myapp.dev.build38.cloud
+      value: api.dev.localtest.me
 - target:
     kind: Deployment
     name: myapp
