@@ -16,7 +16,7 @@ patches:
   patch: |-
     - op: replace
       path: /spec/rules/0/host
-      value: api-staging-myapp.dev.build38.cloud
+      value: myapp-staging.apps.dev.build38.cloud
 - target:
     kind: Deployment
     name: myapp

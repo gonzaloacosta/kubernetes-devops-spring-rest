@@ -14,4 +14,4 @@ patches:
   patch: |-
     - op: replace
       path: /spec/rules/0/host
-      value: api-myapp.eks.dev.build38.cloud
+      value: myapp-dev.apps.dev.build38.cloud
